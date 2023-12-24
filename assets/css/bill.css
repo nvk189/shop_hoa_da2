@@ -1,0 +1,116 @@
+#text-bill{
+    font-size: 16px;
+   
+}
+.bill{
+    display: flex;
+}
+.bill_product{
+    padding: 0 30px;
+}
+.btn_add{
+    background-color: #e91e63;
+     color: #fff; 
+     text-align: center;
+      border-radius:5px ; 
+      cursor: pointer; 
+      margin: 10px 10px;
+}
+.icon-note{
+    color: red;
+}
+.btn_add-bill{
+    margin-top: 20px;
+    display: flex;
+}
+#cusname, #cusphone ,#cusdate, #cusaddress{
+    width: 93%;
+    margin: 10px 0;
+}
+h3{
+    /* width: 100%; */
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 5px 0;
+}
+.address{
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Điều chỉnh khoảng cách giữa tiêu đề và nội dung */
+}
+
+/* CSS cho các ô tiêu đề */
+th {
+    text-align: center;
+    background-color: #ed6b87;
+    color: #fff;
+    font-weight: 400;
+    padding: 10px;
+    text-align: center;
+}
+
+/* CSS cho các ô dữ liệu */
+td {
+    border: 1px solid #ddd;
+    padding: 6px 3px;
+}
+
+/* CSS cho table khi di chuột qua các dòng */
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/*  */
+.bill_yes{
+    /* content: ""; */
+    z-index: 2;
+    display: none;
+    width: 280px;
+    height: 60px;
+    position: fixed;
+    top: 10px;
+    text-align: center;
+    right: 0;
+    cursor: pointer;
+    background-color:#535151;
+    border-radius: 5px;
+}
+.yes_list{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+   
+    
+}
+.icon_yes ,.name_yes{
+    color: white;
+}
+.icon_yes{
+    padding: 10px ;
+    background-color: green;
+    border-radius: 50%;
+}
+.name_yes{
+    font-size: 18px;
+    margin-left: 10px;
+    /* padding-top: 8px; */
+}
+/* .bill_yes {
+    display: none;
+    width: 60px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    /* left: 10%; */
+    /* transition: left 1s;
+    padding: 20px;
+    box-sizing: border-box;
+  } */ 

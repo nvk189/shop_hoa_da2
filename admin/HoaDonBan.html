@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" href="../img/logoCPT.png"> -->
+    <link rel="stylesheet" href="../css/style_mainQT.css">
+    <link rel="stylesheet" href="../css/bill.css">
+    <script src="https://kit.fontawesome.com/e06076012c.js" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/click.js"></script>
+    <script src="/Javascrip/angular.min.js"></script>
+    <script src="/Javascrip/global.js"></script>
+    <script src="/js/BillOut.js"></script>
+    <style>
+     
+
+    </style>
+</head>
+
+<body ng-app="AppBanHoa" ng-controller="BillOut">
+    <section class="header">
+        <a href="javascript:void(0);" class="icon" onclick="openBTN()">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="box-login" id="box-t">
+            Xin chào, <span id="ten_nv">Admin</span> <i class="fas fa-sort-down"></i>
+            <div class="box-login-bottom" id="box-b">
+                <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
+                <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="row">
+            <div class="col-1 col-s-12 category">
+                <button onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
+                <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
+                <button onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</button>
+                <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
+                <button onclick="ThongKe()"><i class="fa-solid fa-calendar-days"></i> Thống kê</button>
+                
+            </div>
+            <div class="bx-left" id="button-left">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeBTN()"><i
+                        class="far fa-window-close"></i></a>
+                <ul>
+                    <li onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</li>
+                    <li onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</li>
+                    <li onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</li>
+                    <li onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</li>
+                    <li onclick="ThongKe()"><i class="fa-solid fa-calendar-days"></i></i>Thống kê</li>
+                </ul>
+            </div>
+            <div class="col-11 col-s-12 content">
+                <div class="col-5 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-shopping-cart"></i> Nhập thông tin hóa đơn bán
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <form>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mã hóa đơn bán:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="mahdb" type="text" id="mahd" placeholder="Mã hóa đơn Tự động nhập...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Khách hàng:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="tenkh" type="text" id="khachhang" list="listKhachHang">
+                                   
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Số điện thoại:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="sodt" type="text" id="sdtkh" placeholder="Nhập số điện thoại...">
+                                </div>
+                               
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Địa chỉ:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="diachi" type="text" id="diachikh" placeholder="Nhập địa chỉ...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Ngày bán:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="ngayban" type="date" id="datetimeInput" name="datetimeInput" >
+                                </div>
+                               
+                                
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Tổng tiền:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input ng-model="tongtien" type="number" id="tongtien" value="0" readonly>
+                                </div>
+                               
+                            </form>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <table class="table_chitiet">
+                               
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="DSSanPham">
+                                    <tr ng-repeat="product in products">
+                                        <td><input type="text" ng-model="product.tenSanPham" placeholder="Tên sản phẩm..."></td>
+                                        <td><input type="number" ng-model="product.soLuong" placeholder="Số lượng..."></td>
+                                        <td><input type="number" ng-model="product.gia" placeholder="Đơn giá..."></td>
+                                        <td><button ><i ng-click="removeProduct1($index)" class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                    
+
+                                </tbody>
+                            </table>
+                            <button ng-click="addProduct()" class="btn-form" id="AddSanPham"
+                            style="background-color: rgba(44, 140, 15, 0.8);">Thêm sản phẩm</button>
+                        </div>
+                        <hr>
+                        <button class="btn-form" style="background-color: rgba(44, 140, 15, 0.8);"
+                            ng-click="them()">Thêm hóa đơn bán</button>
+                        <button class="btn-form" style="background-color: rgba(227, 32, 21, 0.8);"
+                            ng-click="NhapMoi()">Nhập mới</button>
+                        <button ng-click="gethdban()"class="btn-form" style="background-color: blue;">
+                                Cập nhật thông tin
+                        </button>
+                    </div>
+                </div>
+                <div class="col-7 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-shopping-cart"></i> Danh sách hóa đơn bán
+                            <button onclick="XoaChon()" style="margin-right: 3px;"><i class="far fa-trash-alt"></i> Xóa
+                                chọn</button>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 col-s-12 padding-box">
+                                <input ng-model="searchban" type="text" id="search-export" placeholder="Nhập mã hóa đơn bán...">
+                            </div>
+                            <div class="col-2 col-s-12 padding-box">
+                                <button ng-click="Timkiem()"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-s-12 padding-box">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="padding-top: 10px;"><input type="checkbox"
+                                                    onclick="CheckAll(this)"></th>
+                                            <th>Mã HDB</th>
+                                            <th>Khách hàng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Ngày bán</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listExport"></tbody>
+                                    <tbody>
+                                        <tr ng-repeat="x in createBan"  ng-click="load(x)">
+                                            <td style="text-align: center;padding-top: 10px;"><input type="checkbox"
+                                                    value="" id=""></td>
+                                            <td >{{x.mahd}}</td>
+                                            <td >{{x.hoTen}}</td>
+                                            <td >{{x.dienThoai}}</td>
+                                            <td >{{x.diaChi}}</td>
+                                            <td>{{x.ngayDatHang | date:'dd/MM/yyyy'}}</td>
+                                            <td >{{x.tongTien}}</td>
+                                            <td >
+                                                <i ng-click="sua()" class="fas fa-edit" title="Sửa"></i>
+                                                <i ng-click="removeProduct(x)" class="fas fa-trash-alt" title="Xóa"></i>
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 col-s-12 padding-box">
+                                <div class="box-sum">
+                                    <div class="box-left">
+                                        Số lượng hóa đơn: <span id="soluong">{{about}}</span>
+                                        <br>
+                                        <!-- Tổng tiền: <span id="tongtienhd">0</span><span>đ</span> -->
+                                    </div>
+                                    <div class="box-right">
+                                        <button ng-click="prevPage()"><i class="fas fa-angle-left"></i></button>
+                                        <button style="margin: 0 2px;" ng-repeat="page in pages" ng-click="setPage(page)">{{ page }} </button>
+                                        <button ng-click="nextPage()"><i class="fas fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </section>
+</body>
+
+</html>
